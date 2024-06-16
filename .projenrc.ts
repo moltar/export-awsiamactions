@@ -16,4 +16,8 @@ const project = new typescript.TypeScriptProject({
 
 project.package.addField('packageManager', `pnpm@${pnpmVersion}`);
 
+project.addTask('scrape', {
+  exec: `tsx ${project.srcdir}/index.ts`,
+});
+
 project.synth();

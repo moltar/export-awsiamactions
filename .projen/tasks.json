@@ -179,6 +179,14 @@
         }
       ]
     },
+    "scrape": {
+      "name": "scrape",
+      "steps": [
+        {
+          "exec": "tsx src/index.ts"
+        }
+      ]
+    },
     "test": {
       "name": "test",
       "description": "Run tests",
