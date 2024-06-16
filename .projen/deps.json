@@ -5,6 +5,10 @@
       "type": "build"
     },
     {
+      "name": "@types/json-stable-stringify",
+      "type": "build"
+    },
+    {
       "name": "@types/node",
       "version": "^18",
       "type": "build"

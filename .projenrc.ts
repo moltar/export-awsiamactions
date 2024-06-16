@@ -13,6 +13,9 @@ const project = new typescript.TypeScriptProject({
     'playwright',
     'tsx',
   ],
+  devDeps: [
+    '@types/json-stable-stringify',
+  ],
 });
 
 project.package.addField('packageManager', `pnpm@${pnpmVersion}`);
