@@ -37,6 +37,9 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
+  "dependencies": {
+    "playwright": "^1.44.1"
+  },
   "pnpm": {},
   "main": "lib/index.js",
   "license": "Apache-2.0",

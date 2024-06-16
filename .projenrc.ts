@@ -8,6 +8,9 @@ const project = new typescript.TypeScriptProject({
   packageManager: javascript.NodePackageManager.PNPM,
   projenrcTs: true,
   pnpmVersion,
+  deps: [
+    'playwright',
+  ],
 });
 
 project.package.addField('packageManager', `pnpm@${pnpmVersion}`);
