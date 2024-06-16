@@ -20,8 +20,6 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
-      - name: Install Playwright dependencies
-        run: npx playwright install --with-deps chromium
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
@@ -34,6 +32,8 @@ jobs:
         run: pnpm i --frozen-lockfile
       - name: build
         run: npx projen build
+      - name: Install Playwright dependencies
+        run: npx playwright install --with-deps chromium
       - name: Scrape
         run: npx projen scrape
       - id: verify-changed-files

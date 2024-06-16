@@ -35,12 +35,6 @@ const project = new typescript.TypeScriptProject({
       pullRequests: JobPermission.WRITE,
     },
   },
-  workflowBootstrapSteps: [
-    {
-      name: 'Install Playwright dependencies',
-      run: PLAYWRIGHT_INSTALL_COMMAND,
-    },
-  ],
   tsconfig: {
     compilerOptions: {
       lib: ['ES2023', 'DOM'],
@@ -97,6 +91,10 @@ const createPullRequest: JobStep = {
 const $ = (exp: string) => ['${{', exp, '}}'].join(' ');
 
 project.buildWorkflow?.addPostBuildSteps(
+  {
+    name: 'Install Playwright dependencies',
+    run: PLAYWRIGHT_INSTALL_COMMAND,
+  },
   {
     name: 'Scrape',
     run: project.runTaskCommand(scrapeTask),
