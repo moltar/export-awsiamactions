@@ -8,6 +8,9 @@ const project = new typescript.TypeScriptProject({
   packageManager: javascript.NodePackageManager.PNPM,
   projenrcTs: true,
   pnpmVersion,
+  buildWorkflowOptions: {
+    mutableBuild: false,
+  },
   deps: [
     'json-stable-stringify',
     'playwright',
