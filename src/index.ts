@@ -1,4 +1,8 @@
+import { readFile, writeFile } from 'fs/promises';
+import jsonStableStringify from 'json-stable-stringify';
 import playwright from 'playwright';
+
+const SAVE_FILENAME = 'awsiamactions.json';
 
 async function main () {
   const browser = await playwright.chromium.launch({
@@ -15,9 +19,15 @@ async function main () {
   const downloadPromise = page.waitForEvent('download');
   await page.getByText('Save As...').click();
   const download = await downloadPromise;
-  await download.saveAs('awsiamactions.json');
+  await download.saveAs(SAVE_FILENAME);
 
+  // Done
   await browser.close();
+
+  // Stable sort the output
+  const fileContents = await readFile(SAVE_FILENAME, 'utf8');
+  const fileContentsJson = jsonStableStringify(JSON.parse(fileContents), { space: 2 });
+  await writeFile(SAVE_FILENAME, fileContentsJson, 'utf8');
 }
 
 main().catch((err)=>console.error(err));
