@@ -1,6 +1,5 @@
 import { javascript, typescript } from 'projen';
-import { CreatePullRequest } from './projenrc/create-pull-request';
-import { VerifyChangedFiles } from './projenrc/verify-changed-files';
+import { JobStep } from 'projen/lib/github/workflows-model';
 
 const pnpmVersion = '9.3.0';
 
@@ -33,16 +32,25 @@ const scrapeTask = project.addTask('scrape', {
   exec: `tsx ${project.srcdir}/index.ts`,
 });
 
-const verifyChangedFiles = new VerifyChangedFiles(project, {
-  files: ['awsiamactions.json'],
-});
+const verifyChangedFiles: JobStep = {
+  uses: 'tj-actions/verify-changed-files@v20',
+  id: 'verify-changed-files',
+  with: {
+    files: 'awsiamactions.json',
+  },
+};
 
-const createPullRequest= new CreatePullRequest(project, {
-  addPaths: ['awsiamactions.json'],
-  title: 'chore: updates awsiamactions.json',
-  body: 'Updates `awsiamactions.json`.',
-  commitMessage: 'chore: updates awsiamactions.json',
-});
+const createPullRequest: JobStep = {
+  uses: 'peter-evans/create-pull-request@v6',
+  with: {
+    'add-paths': 'awsiamactions.json',
+    'commit-message': 'chore: updates awsiamactions.json',
+    'title': 'chore: updates awsiamactions.json',
+    'body': 'Updates `awsiamactions.json`.',
+  },
+};
+
+const $ = (exp: string) => ['${{', exp, '}}'].join(' ');
 
 project.buildWorkflow?.addPostBuildSteps(
   {
@@ -50,7 +58,10 @@ project.buildWorkflow?.addPostBuildSteps(
     run: project.runTaskCommand(scrapeTask),
   },
   verifyChangedFiles,
-  createPullRequest,
+  {
+    ...createPullRequest,
+    if: $(`steps.${verifyChangedFiles.id}.outputs.files_changed == 'true'`),
+  },
 );
 
 project.synth();
