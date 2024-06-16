@@ -9,7 +9,8 @@ const minNodeVersion = '20.14.0';
  */
 const AWS_IAM_ACTIONS_FILENAME = 'awsiamactions.json';
 
-const PLAYWRIGHT_INSTALL_COMMAND ='npx playwright install --with-deps chromium';
+const PLAYWRIGHT_INSTALL_COMMAND =
+  'npx playwright install --with-deps chromium';
 
 const project = new typescript.TypeScriptProject({
   defaultReleaseBranch: 'main',
@@ -25,7 +26,7 @@ const project = new typescript.TypeScriptProject({
   prettierOptions: {
     settings: {
       singleQuote: true,
-    }
+    },
   },
   buildWorkflowOptions: {
     mutableBuild: false,
@@ -47,12 +48,12 @@ const project = new typescript.TypeScriptProject({
     },
   },
   deps: [
-    'json-stable-stringify',
+    'json-stable-stringify', //
     'playwright',
     'tsx',
   ],
   devDeps: [
-    '@types/json-stable-stringify',
+    '@types/json-stable-stringify', //
   ],
 });
 
@@ -64,7 +65,10 @@ for (const filename of ['.node-version', '.nvmrc']) {
   });
 }
 
-for (const task of [project.package.installTask, project.package.installCiTask]) {
+for (const task of [
+  project.package.installTask,
+  project.package.installCiTask,
+]) {
   task.exec(PLAYWRIGHT_INSTALL_COMMAND);
 }
 
@@ -85,8 +89,8 @@ const createPullRequest: JobStep = {
   with: {
     'add-paths': AWS_IAM_ACTIONS_FILENAME,
     'commit-message': 'chore: updates awsiamactions.json',
-    'title': 'chore: updates awsiamactions.json',
-    'body': 'Updates `awsiamactions.json`.',
+    title: 'chore: updates awsiamactions.json',
+    body: 'Updates `awsiamactions.json`.',
   },
 };
 

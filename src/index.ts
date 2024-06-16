@@ -4,7 +4,7 @@ import playwright from 'playwright';
 
 const SAVE_FILENAME = process.argv.at(2) ?? 'awsiamactions.json';
 
-async function main () {
+async function main() {
   const browser = await playwright.chromium.launch();
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -24,8 +24,10 @@ async function main () {
 
   // Stable sort the output
   const fileContents = await readFile(SAVE_FILENAME, 'utf8');
-  const fileContentsJson = jsonStableStringify(JSON.parse(fileContents), { space: 2 });
+  const fileContentsJson = jsonStableStringify(JSON.parse(fileContents), {
+    space: 2,
+  });
   await writeFile(SAVE_FILENAME, fileContentsJson, 'utf8');
 }
 
-main().catch((err)=>console.error(err));
+main().catch((err) => console.error(err));
