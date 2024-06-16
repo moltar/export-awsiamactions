@@ -18,6 +18,7 @@ const project = new typescript.TypeScriptProject({
   projenrcTs: true,
   jest: false,
   package: false,
+  depsUpgrade: false,
   pnpmVersion,
   minNodeVersion,
   buildWorkflowOptions: {
