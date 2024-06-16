@@ -16,6 +16,7 @@ const project = new typescript.TypeScriptProject({
   name: 'export-awsiamactions',
   packageManager: javascript.NodePackageManager.PNPM,
   projenrcTs: true,
+  jest: false,
   pnpmVersion,
   minNodeVersion,
   buildWorkflowOptions: {
