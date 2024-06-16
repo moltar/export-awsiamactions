@@ -1,4 +1,3 @@
-import { format } from 'util';
 import { TextFile, javascript, typescript } from 'projen';
 import { JobPermission, JobStep } from 'projen/lib/github/workflows-model';
 
@@ -106,16 +105,6 @@ project.buildWorkflow?.addPostBuildSteps(
   {
     ...createPullRequest,
     if: $(`steps.${verifyChangedFiles.id}.outputs.files_changed == 'true'`),
-  },
-  {
-    run: format(
-      'gh pr review %s --approve',
-      $(`steps.${createPullRequest.id}.outputs.pull-request-number`),
-    ),
-    if: $(`steps.${createPullRequest.id}.outputs.pull-request-number`),
-    env: {
-      GH_TOKEN: $('github.token'),
-    },
   },
 );
 
