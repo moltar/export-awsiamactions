@@ -114,7 +114,7 @@ project.buildWorkflow?.addPostBuildSteps(
 project.github?.tryFindWorkflow('build')?.on({
   schedule: [
     {
-      cron: '5 8 * * MON',
+      cron: '0 1 * * *',
     },
   ],
 });
