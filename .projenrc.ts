@@ -2,6 +2,7 @@ import { javascript, typescript } from 'projen';
 import { JobPermission, JobStep } from 'projen/lib/github/workflows-model';
 
 const pnpmVersion = '9.3.0';
+const minNodeVersion = '20.14.0';
 
 /**
  * The file where the scraped actions will be saved to.
@@ -16,6 +17,7 @@ const project = new typescript.TypeScriptProject({
   packageManager: javascript.NodePackageManager.PNPM,
   projenrcTs: true,
   pnpmVersion,
+  minNodeVersion,
   buildWorkflowOptions: {
     mutableBuild: false,
     permissions: {
