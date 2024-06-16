@@ -12,6 +12,8 @@
     ".npmignore",
     ".npmrc",
     ".nvmrc",
+    ".prettierignore",
+    ".prettierrc.json",
     ".projen/deps.json",
     ".projen/files.json",
     ".projen/tasks.json",

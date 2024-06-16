@@ -21,6 +21,7 @@ const project = new typescript.TypeScriptProject({
   depsUpgrade: false,
   pnpmVersion,
   minNodeVersion,
+  prettier: true,
   buildWorkflowOptions: {
     mutableBuild: false,
     permissions: {
