@@ -50,6 +50,7 @@ jobs:
           commit-message: "chore: updates awsiamactions.json"
           title: "chore: updates awsiamactions.json"
           body: Updates `awsiamactions.json`.
+          labels: auto-merge
       - name: Find mutations
         id: self_mutation
         run: |-

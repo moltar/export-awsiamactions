@@ -22,3 +22,10 @@ pull_request_rules:
       - "#approved-reviews-by>=1"
       - -label~=(do-not-merge)
       - status-success=build
+  - name: Merge auto-updates
+    conditions:
+      - label=auto-merge
+    actions:
+      delete_head_branch: {}
+      merge:
+        method: squash

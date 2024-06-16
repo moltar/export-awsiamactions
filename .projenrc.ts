@@ -79,6 +79,8 @@ const verifyChangedFiles: JobStep = {
   },
 };
 
+const PULL_REQUEST_LABEL = 'auto-merge';
+
 const createPullRequest: JobStep = {
   uses: 'peter-evans/create-pull-request@v6',
   id: 'create-pull-request',
@@ -87,6 +89,7 @@ const createPullRequest: JobStep = {
     'commit-message': 'chore: updates awsiamactions.json',
     title: 'chore: updates awsiamactions.json',
     body: 'Updates `awsiamactions.json`.',
+    labels: PULL_REQUEST_LABEL,
   },
 };
 
@@ -114,6 +117,17 @@ project.github?.tryFindWorkflow('build')?.on({
       cron: '5 8 * * MON',
     },
   ],
+});
+
+project.github?.mergify?.addRule({
+  name: 'Merge auto-updates',
+  conditions: [`label=${PULL_REQUEST_LABEL}`],
+  actions: {
+    delete_head_branch: {},
+    merge: {
+      method: 'squash',
+    },
+  },
 });
 
 project.synth();
