@@ -1,4 +1,5 @@
 import { javascript, typescript } from 'projen';
+import { CreatePullRequest } from './projenrc/create-pull-request';
 import { VerifyChangedFiles } from './projenrc/verify-changed-files';
 
 const pnpmVersion = '9.3.0';
@@ -39,6 +40,12 @@ project.buildWorkflow?.addPostBuildSteps(
   },
   new VerifyChangedFiles(project, {
     files: ['awsiamactions.json'],
+  }),
+  new CreatePullRequest(project, {
+    addPaths: ['awsiamactions.json'],
+    title: 'chore: updates awsiamactions.json',
+    body: 'Updates `awsiamactions.json`.',
+    commitMessage: 'chore: updates awsiamactions.json',
   }),
 );
 
