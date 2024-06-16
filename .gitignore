@@ -48,4 +48,6 @@ junit.xml
 /lib
 /dist/
 !/.eslintrc.json
+!/.node-version
+!/.nvmrc
 !/.projenrc.ts

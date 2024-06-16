@@ -1,4 +1,4 @@
-import { javascript, typescript } from 'projen';
+import { TextFile, javascript, typescript } from 'projen';
 import { JobPermission, JobStep } from 'projen/lib/github/workflows-model';
 
 const pnpmVersion = '9.3.0';
@@ -48,6 +48,12 @@ const project = new typescript.TypeScriptProject({
 });
 
 project.package.addField('packageManager', `pnpm@${pnpmVersion}`);
+
+for (const filename of ['.node-version', '.nvmrc']) {
+  new TextFile(project, filename, {
+    lines: [minNodeVersion],
+  });
+}
 
 for (const task of [project.package.installTask, project.package.installCiTask]) {
   task.exec(PLAYWRIGHT_INSTALL_COMMAND);
