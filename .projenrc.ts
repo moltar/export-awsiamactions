@@ -10,6 +10,7 @@ const project = new typescript.TypeScriptProject({
   pnpmVersion,
   deps: [
     'playwright',
+    'tsx',
   ],
 });
 
