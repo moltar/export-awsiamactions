@@ -22,6 +22,11 @@ const project = new typescript.TypeScriptProject({
   pnpmVersion,
   minNodeVersion,
   prettier: true,
+  prettierOptions: {
+    settings: {
+      singleQuote: true,
+    }
+  },
   buildWorkflowOptions: {
     mutableBuild: false,
     permissions: {
