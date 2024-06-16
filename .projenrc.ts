@@ -29,6 +29,11 @@ const project = new typescript.TypeScriptProject({
       run: PLAYWRIGHT_INSTALL_COMMAND,
     },
   ],
+  tsconfig: {
+    compilerOptions: {
+      lib: ['es2019', 'DOM'],
+    },
+  },
   deps: [
     'json-stable-stringify',
     'playwright',
