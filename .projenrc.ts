@@ -33,20 +33,24 @@ const scrapeTask = project.addTask('scrape', {
   exec: `tsx ${project.srcdir}/index.ts`,
 });
 
+const verifyChangedFiles = new VerifyChangedFiles(project, {
+  files: ['awsiamactions.json'],
+});
+
+const createPullRequest= new CreatePullRequest(project, {
+  addPaths: ['awsiamactions.json'],
+  title: 'chore: updates awsiamactions.json',
+  body: 'Updates `awsiamactions.json`.',
+  commitMessage: 'chore: updates awsiamactions.json',
+});
+
 project.buildWorkflow?.addPostBuildSteps(
   {
     name: 'Scrape',
     run: project.runTaskCommand(scrapeTask),
   },
-  new VerifyChangedFiles(project, {
-    files: ['awsiamactions.json'],
-  }),
-  new CreatePullRequest(project, {
-    addPaths: ['awsiamactions.json'],
-    title: 'chore: updates awsiamactions.json',
-    body: 'Updates `awsiamactions.json`.',
-    commitMessage: 'chore: updates awsiamactions.json',
-  }),
+  verifyChangedFiles,
+  createPullRequest,
 );
 
 project.synth();
