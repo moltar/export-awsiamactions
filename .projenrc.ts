@@ -3,6 +3,11 @@ import { JobStep } from 'projen/lib/github/workflows-model';
 
 const pnpmVersion = '9.3.0';
 
+/**
+ * The file where the scraped actions will be saved to.
+ */
+const AWS_IAM_ACTIONS_FILENAME = 'awsiamactions.json';
+
 const project = new typescript.TypeScriptProject({
   defaultReleaseBranch: 'main',
   name: 'export-awsiamactions',
@@ -36,14 +41,14 @@ const verifyChangedFiles: JobStep = {
   uses: 'tj-actions/verify-changed-files@v20',
   id: 'verify-changed-files',
   with: {
-    files: 'awsiamactions.json',
+    files: AWS_IAM_ACTIONS_FILENAME,
   },
 };
 
 const createPullRequest: JobStep = {
   uses: 'peter-evans/create-pull-request@v6',
   with: {
-    'add-paths': 'awsiamactions.json',
+    'add-paths': AWS_IAM_ACTIONS_FILENAME,
     'commit-message': 'chore: updates awsiamactions.json',
     'title': 'chore: updates awsiamactions.json',
     'body': 'Updates `awsiamactions.json`.',
