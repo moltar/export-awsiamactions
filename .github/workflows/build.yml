@@ -27,6 +27,8 @@ jobs:
         run: pnpm i --no-frozen-lockfile
       - name: build
         run: npx projen build
+      - name: Scrape
+        run: npx projen scrape
       - name: Find mutations
         id: self_mutation
         run: |-

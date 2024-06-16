@@ -18,8 +18,15 @@ project.package.addField('packageManager', `pnpm@${pnpmVersion}`);
 
 project.package.installTask.exec('npx playwright install --with-deps chromium');
 
-project.addTask('scrape', {
+const scrapeTask = project.addTask('scrape', {
   exec: `tsx ${project.srcdir}/index.ts`,
 });
+
+project.buildWorkflow?.addPostBuildSteps(
+  {
+    name: 'Scrape',
+    run: project.runTaskCommand(scrapeTask),
+  },
+);
 
 project.synth();
