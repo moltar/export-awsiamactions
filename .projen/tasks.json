@@ -189,7 +189,7 @@
       "name": "scrape",
       "steps": [
         {
-          "exec": "tsx src/index.ts"
+          "exec": "tsx src/index.ts awsiamactions.json"
         }
       ]
     },

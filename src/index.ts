@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'fs/promises';
 import jsonStableStringify from 'json-stable-stringify';
 import playwright from 'playwright';
 
-const SAVE_FILENAME = 'awsiamactions.json';
+const SAVE_FILENAME = process.argv.at(2) ?? 'awsiamactions.json';
 
 async function main () {
   const browser = await playwright.chromium.launch();

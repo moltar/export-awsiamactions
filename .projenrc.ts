@@ -34,7 +34,7 @@ for (const task of [project.package.installTask, project.package.installCiTask])
 }
 
 const scrapeTask = project.addTask('scrape', {
-  exec: `tsx ${project.srcdir}/index.ts`,
+  exec: `tsx ${project.srcdir}/index.ts ${AWS_IAM_ACTIONS_FILENAME}`,
 });
 
 const verifyChangedFiles: JobStep = {
