@@ -40,13 +40,15 @@ jobs:
         uses: tj-actions/verify-changed-files@v20
         with:
           files: awsiamactions.json
-      - if: ${{ steps.verify-changed-files.outputs.files_changed == 'true' }}
+      - id: create-pull-request
+        if: ${{ steps.verify-changed-files.outputs.files_changed == 'true' }}
         uses: peter-evans/create-pull-request@v6
         with:
           add-paths: awsiamactions.json
           commit-message: "chore: updates awsiamactions.json"
           title: "chore: updates awsiamactions.json"
           body: Updates `awsiamactions.json`.
+      - run: gh pr review ${{ steps.create-pull-request.outputs.pull-request-number }} --approve
       - name: Find mutations
         id: self_mutation
         run: |-

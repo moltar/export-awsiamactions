@@ -1,3 +1,4 @@
+import { format } from 'util';
 import { TextFile, javascript, typescript } from 'projen';
 import { JobPermission, JobStep } from 'projen/lib/github/workflows-model';
 
@@ -80,6 +81,7 @@ const verifyChangedFiles: JobStep = {
 
 const createPullRequest: JobStep = {
   uses: 'peter-evans/create-pull-request@v6',
+  id: 'create-pull-request',
   with: {
     'add-paths': AWS_IAM_ACTIONS_FILENAME,
     'commit-message': 'chore: updates awsiamactions.json',
@@ -103,6 +105,12 @@ project.buildWorkflow?.addPostBuildSteps(
   {
     ...createPullRequest,
     if: $(`steps.${verifyChangedFiles.id}.outputs.files_changed == 'true'`),
+  },
+  {
+    run: format(
+      'gh pr review %s --approve',
+      $(`steps.${createPullRequest.id}.outputs.pull-request-number`),
+    ),
   },
 );
 
