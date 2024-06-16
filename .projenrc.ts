@@ -33,7 +33,8 @@ const project = new typescript.TypeScriptProject({
   ],
   tsconfig: {
     compilerOptions: {
-      lib: ['es2019', 'DOM'],
+      lib: ['ES2023', 'DOM'],
+      target: 'ES2022',
     },
   },
   deps: [
