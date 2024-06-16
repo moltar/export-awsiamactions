@@ -131,6 +131,9 @@
       "steps": [
         {
           "exec": "pnpm i --frozen-lockfile"
+        },
+        {
+          "exec": "npx playwright install --with-deps chromium"
         }
       ]
     },

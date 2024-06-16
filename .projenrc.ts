@@ -16,7 +16,9 @@ const project = new typescript.TypeScriptProject({
 
 project.package.addField('packageManager', `pnpm@${pnpmVersion}`);
 
-project.package.installTask.exec('npx playwright install --with-deps chromium');
+for (const task of [project.package.installTask, project.package.installCiTask]) {
+  task.exec('npx playwright install --with-deps chromium');
+}
 
 const scrapeTask = project.addTask('scrape', {
   exec: `tsx ${project.srcdir}/index.ts`,
