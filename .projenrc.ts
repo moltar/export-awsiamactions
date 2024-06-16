@@ -117,4 +117,12 @@ project.buildWorkflow?.addPostBuildSteps(
   },
 );
 
+project.github?.tryFindWorkflow('build')?.on({
+  schedule: [
+    {
+      cron: '5 8 * * MON',
+    },
+  ],
+});
+
 project.synth();
