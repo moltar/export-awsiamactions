@@ -5,9 +5,7 @@ import playwright from 'playwright';
 const SAVE_FILENAME = 'awsiamactions.json';
 
 async function main () {
-  const browser = await playwright.chromium.launch({
-    headless: false,
-  });
+  const browser = await playwright.chromium.launch();
   const context = await browser.newContext();
   const page = await context.newPage();
 
