@@ -9,6 +9,7 @@ const project = new typescript.TypeScriptProject({
   projenrcTs: true,
   pnpmVersion,
   deps: [
+    'json-stable-stringify',
     'playwright',
     'tsx',
   ],

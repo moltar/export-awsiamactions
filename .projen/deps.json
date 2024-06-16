@@ -68,6 +68,10 @@
       "type": "build"
     },
     {
+      "name": "json-stable-stringify",
+      "type": "runtime"
+    },
+    {
       "name": "playwright",
       "type": "runtime"
     },

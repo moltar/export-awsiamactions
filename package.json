@@ -39,6 +39,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "json-stable-stringify": "^1.1.1",
     "playwright": "^1.44.1",
     "tsx": "^4.15.5"
   },
