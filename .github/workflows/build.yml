@@ -48,7 +48,9 @@ jobs:
           commit-message: "chore: updates awsiamactions.json"
           title: "chore: updates awsiamactions.json"
           body: Updates `awsiamactions.json`.
-      - run: gh pr review ${{ steps.create-pull-request.outputs.pull-request-number }} --approve
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr review ${{ steps.create-pull-request.outputs.pull-request-number }} --approve
       - name: Find mutations
         id: self_mutation
         run: |-

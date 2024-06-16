@@ -111,6 +111,9 @@ project.buildWorkflow?.addPostBuildSteps(
       'gh pr review %s --approve',
       $(`steps.${createPullRequest.id}.outputs.pull-request-number`),
     ),
+    env: {
+      GH_TOKEN: $('github.token'),
+    },
   },
 );
 
