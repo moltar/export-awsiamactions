@@ -20,6 +20,8 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
+      - name: Install Playwright dependencies
+        run: npx playwright install --with-deps chromium
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:

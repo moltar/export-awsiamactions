@@ -8,6 +8,8 @@ const pnpmVersion = '9.3.0';
  */
 const AWS_IAM_ACTIONS_FILENAME = 'awsiamactions.json';
 
+const PLAYWRIGHT_INSTALL_COMMAND ='npx playwright install --with-deps chromium';
+
 const project = new typescript.TypeScriptProject({
   defaultReleaseBranch: 'main',
   name: 'export-awsiamactions',
@@ -21,6 +23,12 @@ const project = new typescript.TypeScriptProject({
       pullRequests: JobPermission.WRITE,
     },
   },
+  workflowBootstrapSteps: [
+    {
+      name: 'Install Playwright dependencies',
+      run: PLAYWRIGHT_INSTALL_COMMAND,
+    },
+  ],
   deps: [
     'json-stable-stringify',
     'playwright',
@@ -34,7 +42,7 @@ const project = new typescript.TypeScriptProject({
 project.package.addField('packageManager', `pnpm@${pnpmVersion}`);
 
 for (const task of [project.package.installTask, project.package.installCiTask]) {
-  task.exec('npx playwright install --with-deps chromium');
+  task.exec(PLAYWRIGHT_INSTALL_COMMAND);
 }
 
 const scrapeTask = project.addTask('scrape', {
