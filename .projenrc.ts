@@ -1,4 +1,5 @@
 import { javascript, typescript } from 'projen';
+import { VerifyChangedFiles } from './projenrc/verify-changed-files';
 
 const pnpmVersion = '9.3.0';
 
@@ -36,6 +37,9 @@ project.buildWorkflow?.addPostBuildSteps(
     name: 'Scrape',
     run: project.runTaskCommand(scrapeTask),
   },
+  new VerifyChangedFiles(project, {
+    files: ['awsiamactions.json'],
+  }),
 );
 
 project.synth();
