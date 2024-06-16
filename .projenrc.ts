@@ -1,5 +1,5 @@
 import { javascript, typescript } from 'projen';
-import { JobStep } from 'projen/lib/github/workflows-model';
+import { JobPermission, JobStep } from 'projen/lib/github/workflows-model';
 
 const pnpmVersion = '9.3.0';
 
@@ -16,6 +16,10 @@ const project = new typescript.TypeScriptProject({
   pnpmVersion,
   buildWorkflowOptions: {
     mutableBuild: false,
+    permissions: {
+      contents: JobPermission.WRITE,
+      pullRequests: JobPermission.WRITE,
+    },
   },
   deps: [
     'json-stable-stringify',
