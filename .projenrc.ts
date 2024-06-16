@@ -21,6 +21,7 @@ const project = new typescript.TypeScriptProject({
   jest: false,
   package: false,
   depsUpgrade: false,
+  release: false,
   pnpmVersion,
   minNodeVersion,
   prettier: true,

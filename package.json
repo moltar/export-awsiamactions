@@ -2,7 +2,6 @@
   "name": "export-awsiamactions",
   "scripts": {
     "build": "npx projen build",
-    "bump": "npx projen bump",
     "clobber": "npx projen clobber",
     "compile": "npx projen compile",
     "default": "npx projen default",
@@ -11,10 +10,8 @@
     "package": "npx projen package",
     "post-compile": "npx projen post-compile",
     "pre-compile": "npx projen pre-compile",
-    "release": "npx projen release",
     "scrape": "npx projen scrape",
     "test": "npx projen test",
-    "unbump": "npx projen unbump",
     "watch": "npx projen watch",
     "projen": "npx projen"
   },
@@ -31,7 +28,6 @@
     "eslint-plugin-prettier": "^5.1.3",
     "prettier": "^3.3.2",
     "projen": "^0.82.6",
-    "standard-version": "^9",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
